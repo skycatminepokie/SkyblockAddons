@@ -96,7 +96,7 @@ public class PlayerListener {
     private static final Pattern DEATH_MESSAGE_PATTERN = Pattern.compile(" ☠ (?<username>\\w+) (?<causeOfDeath>.+)\\.");
     private static final Pattern REVIVE_MESSAGE_PATTERN = Pattern.compile(" ❣ (?<revivedPlayer>\\w+) was revived(?: by (?<reviver>\\w+))*!");
     private static final Pattern ACCESSORY_BAG_REFORGE_PATTERN = Pattern.compile("You applied the (?<reforge>\\w+) reforge to (?:\\d+) accessories in your Accessory Bag!");
-    private static final Pattern OBTAIN_SUPERBOOM_TNT_PATTERN = Pattern.compile("(?<username>\\w+) has obtained Superboom TNT!");
+    private static final Pattern OBTAIN_SUPERBOOM_TNT_PATTERN = Pattern.compile("(?<username>\\w+) has obtained Superboom TNT(?: x\\d?)?!"); // Ty regex101.com
 
 
     // Between these two coordinates is the whole "arena" area where all the magmas and stuff are.
@@ -321,7 +321,7 @@ public class PlayerListener {
                 } else if (main.getConfigValues().isEnabled(Feature.SHOW_ENCHANTMENTS_REFORGES) &&
                         (matcher = ACCESSORY_BAG_REFORGE_PATTERN.matcher(unformattedText)).matches()) {
                     GuiChestHook.setLastAccessoryBagReforge(matcher.group("reforge"));
-                } else if ((OBTAIN_SUPERBOOM_TNT_PATTERN.matcher(strippedText).matches()) && main.getConfigValues().isEnabled(Feature.DISABLE_SUPERBOOM_TNT_OBATAINED_MESSAGE)) { // username has obtained Superboom TNT!
+                } else if ((OBTAIN_SUPERBOOM_TNT_PATTERN.matcher(strippedText).matches()) && main.getConfigValues().isEnabled(Feature.DISABLE_SUPERBOOM_TNT_OBTAINED_MESSAGE)) { // username has obtained Superboom TNT!
                     e.setCanceled(true);
                 }
 
